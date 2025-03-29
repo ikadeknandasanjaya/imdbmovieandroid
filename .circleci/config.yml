@@ -1,19 +1,23 @@
 version: 2.1
-
+ 
+orbs:
+  android: circleci/android@2.3.0
+ 
 jobs:
   build:
-    docker:
-      - image: cimg/android:2023.08-java17
+    executor:
+      name: android/android-machine
+      resource-class: large
+      tag: 2023.07.1
     steps:
       - checkout
+      - android/setup-java:
+          java-version: 17
       - restore_cache:
           key: android-orb-v1-
       - run:
           name: Chmod permissions
           command: chmod +x ./gradlew
-      - run:
-          name: Check Java version
-          command: java -version
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
