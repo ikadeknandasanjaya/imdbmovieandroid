@@ -14,6 +14,17 @@ jobs:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
       - run:
+          name: Check Java version
+          command: java -version
+      - run:
+          name: Set Java 17
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y openjdk-17-jdk
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            export PATH=$JAVA_HOME/bin:$PATH
+            java -version
+      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
