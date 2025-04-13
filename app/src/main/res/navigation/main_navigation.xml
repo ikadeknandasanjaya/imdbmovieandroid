@@ -27,7 +27,7 @@
 
     <activity
         android:id="@+id/detailMovieActivity"
-        android:name="com.capstone.submissionexpertone.core.detail.DetailMovieActivity"
+        android:name="com.capstone.submissionexpertone.detail.DetailMovieActivity"
         android:label="@string/movie_detail"
         tools:layout="@layout/activity_detail_movie">
         <argument

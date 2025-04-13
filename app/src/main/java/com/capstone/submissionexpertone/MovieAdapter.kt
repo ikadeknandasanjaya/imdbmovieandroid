@@ -1,4 +1,4 @@
-package com.capstone.submissionexpertone.core
+package com.capstone.submissionexpertone
 
 
 import android.view.LayoutInflater
@@ -43,6 +43,10 @@ class MovieAdapter(private val onItemClick: (Movie) -> Unit) :
         }
     }
 
+    override fun onViewRecycled(holder: MovieViewHolder) {
+        super.onViewRecycled(holder)
+    }
+
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -54,4 +58,9 @@ class MovieAdapter(private val onItemClick: (Movie) -> Unit) :
             }
         }
     }
+
+    fun clearListener() {
+        submitList(null)
+    }
+
 }

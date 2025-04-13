@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.submissionexpertone.core.MovieAdapter
-import com.capstone.submissionexpertone.core.detail.DetailMovieActivity
+import com.capstone.submissionexpertone.MovieAdapter
+import com.capstone.submissionexpertone.detail.DetailMovieActivity
 import com.capstone.submissionexpertone.core.domain.model.Movie
 import com.capstone.submissionexpertone.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,9 +22,10 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModels()
-    private lateinit var movieAdapter: MovieAdapter
-
+    private var _movieAdapter: MovieAdapter? = null
+    private val movieAdapter get() = _movieAdapter!!
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,13 +42,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        movieAdapter = MovieAdapter { movie ->
+        _movieAdapter = MovieAdapter { movie ->
             navigateToDetail(movie)
         }
 
         binding.rvMovies.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = movieAdapter
+            adapter = _movieAdapter
         }
     }
 
@@ -84,6 +85,11 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvMovies.adapter = null
+
+        _movieAdapter?.clearListener()
+        _movieAdapter = null
+
         super.onDestroyView()
         _binding = null
     }

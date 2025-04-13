@@ -7,15 +7,17 @@ import com.capstone.submissionexpertone.core.domain.model.Movie
 import com.capstone.submissionexpertone.core.domain.repository.IMovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+
+
 class MovieInteractor @Inject constructor(
 
     private val movieRepository: IMovieRepository
 ) : MovieUseCase {
 
-    override fun getPopularMovies(): Flow<com.capstone.submissionexpertone.core.data.Resource<List<Movie>>> =
+    override fun getPopularMovies(): Flow<Resource<List<Movie>>> =
         movieRepository.getPopularMovies()
 
-    override fun getMovieDetail(movieId: Int): Flow<com.capstone.submissionexpertone.core.data.Resource<Movie>> =
+    override fun getMovieDetail(movieId: Int): Flow<Resource<Movie>> =
         movieRepository.getMovieDetail(movieId)
 
     override fun getFavoriteMovies(): Flow<List<Movie>> =

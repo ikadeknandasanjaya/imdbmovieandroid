@@ -1,4 +1,4 @@
-package com.capstone.submissionexpertone.core.detail
+package com.capstone.submissionexpertone.detail
 
 
 import androidx.lifecycle.LiveData

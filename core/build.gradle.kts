@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
-    id("kotlin-kapt")
-
+    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
 
@@ -18,17 +17,22 @@ android {
         consumerProguardFiles("consumer-rules.pro")
 
         buildConfigField("String", "API_KEY", "\"0e8589745874af6ea29af4378acae229\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
 
     }
 
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -56,19 +60,18 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    ksp("com.google.dagger:hilt-android-compiler:2.48")
 
-    // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 
-    implementation("androidx.activity:activity-ktx:1.8.2")  // Untuk Activity.viewModels()
+    implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation("com.google.dagger:hilt-android:2.48")
     implementation(libs.androidx.recyclerview)
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    ksp("com.google.dagger:hilt-android-compiler:2.48")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -78,7 +81,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
 
 
     // Retrofit
@@ -92,5 +95,8 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-android:3.5.0")
+
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 
 }

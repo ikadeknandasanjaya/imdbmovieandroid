@@ -14,6 +14,7 @@ interface ApiService {
         @Query("api_key") apiKey: String = BuildConfig.API_KEY
     ): MovieListResponse
 
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,

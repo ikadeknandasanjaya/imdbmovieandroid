@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.submissionexpertone.core.MovieAdapter
-import com.capstone.submissionexpertone.core.detail.DetailMovieActivity
+import com.capstone.submissionexpertone.MovieAdapter
+import com.capstone.submissionexpertone.detail.DetailMovieActivity
 import com.capstone.submissionexpertone.core.domain.model.Movie
 import com.capstone.submissionexpertone.core.domain.usecase.MovieUseCase
 import com.capstone.submissionexpertone.favorite.databinding.FragmentFavoriteBinding
@@ -30,7 +29,9 @@ class FavoriteFragment : Fragment() {
     lateinit var factory: FavoriteViewModelFactory
 
     private lateinit var favoriteViewModel: FavoriteViewModel
-    private lateinit var movieAdapter: MovieAdapter
+
+    private var _movieAdapter: MovieAdapter? = null
+    private val movieAdapter get() = _movieAdapter!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -56,13 +57,13 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        movieAdapter = MovieAdapter { movie ->
+        _movieAdapter = MovieAdapter { movie ->
             navigateToDetail(movie)
         }
 
         binding.rvFavoriteMovies.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = movieAdapter
+            adapter = _movieAdapter
         }
     }
 
@@ -87,6 +88,11 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvFavoriteMovies.adapter = null
+
+        _movieAdapter?.clearListener()
+        _movieAdapter = null
+
         super.onDestroyView()
         _binding = null
     }

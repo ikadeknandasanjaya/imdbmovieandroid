@@ -1,4 +1,4 @@
-package com.capstone.submissionexpertone.core.detail
+package com.capstone.submissionexpertone.detail
 
 
 import android.os.Bundle
@@ -40,16 +40,16 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun observeMovieDetail() {
         detailViewModel.getMovieDetail(movieId).observe(this) { resource ->
             when (resource) {
-                is com.capstone.submissionexpertone.core.data.Resource.Loading -> {
+                is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is com.capstone.submissionexpertone.core.data.Resource.Success -> {
+                is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     resource.data?.let { movie ->
                         populateMovieDetails(movie)
                     }
                 }
-                is com.capstone.submissionexpertone.core.data.Resource.Error -> {
+                is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show()
                 }
@@ -83,8 +83,17 @@ class DetailMovieActivity : AppCompatActivity() {
         with(binding) {
             collapsingToolbar.title = movie.title
             tvTitle.text = movie.title
-            tvReleaseDate.text = "Release Date: ${movie.releaseDate ?: "Unknown"}"
-            tvRating.text = "Rating: ${movie.voteAverage}/10 (${movie.voteCount} votes)"
+            tvReleaseDate.text = getString(
+                com.capstone.submissionexpertone.R.string.release_date_format,
+                movie.releaseDate ?: getString(com.capstone.submissionexpertone.R.string.unknown_release_date)
+            )
+
+            tvRating.text = getString(
+                com.capstone.submissionexpertone.R.string.rating_format,
+                movie.voteAverage.toString(),
+                movie.voteCount
+            )
+
             tvOverview.text = movie.overview
 
             Glide.with(this@DetailMovieActivity)

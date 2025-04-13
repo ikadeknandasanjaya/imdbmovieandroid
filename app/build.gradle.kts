@@ -2,11 +2,11 @@
  plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("kotlin-kapt")
     id("kotlin-parcelize")
     id ("androidx.navigation.safeargs.kotlin")
     id ("com.google.dagger.hilt.android")
-}
+     id("com.google.devtools.ksp")
+ }
 
 android {
     namespace = "com.capstone.submissionexpertone"
@@ -27,11 +27,15 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -77,7 +81,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     implementation("androidx.room:room-runtime:2.6.0")
-    kapt("androidx.room:room-compiler:2.6.0")
+    ksp("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -90,17 +94,17 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    ksp("com.google.dagger:hilt-android-compiler:2.48")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.10")
 
-}
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 
-kapt {
-    correctErrorTypes = true
 }

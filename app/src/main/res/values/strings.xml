@@ -11,4 +11,7 @@
     <string name="added_to_favorite">Added to favorite</string>
     <string name="removed_from_favorite">Removed from favorite</string>
     <string name="title_favorite">favorite</string>
+    <string name="release_date_format">Release Date: %1$s</string>
+    <string name="unknown_release_date">Unknown</string>
+    <string name="rating_format">Rating: %1$s/10 (%2$d votes)</string>
 </resources>
