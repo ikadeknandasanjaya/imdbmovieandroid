@@ -1,8 +1,9 @@
-package com.capstone.submissionexpertone.favorite
+package com.capstone.submissionexpertone.favorite.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.submissionexpertone.core.domain.usecase.MovieUseCase
+import com.capstone.submissionexpertone.favorite.FavoriteViewModel
 import javax.inject.Inject
 
 class FavoriteViewModelFactory @Inject constructor(

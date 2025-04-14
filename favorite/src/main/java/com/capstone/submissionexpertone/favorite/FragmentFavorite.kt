@@ -15,6 +15,7 @@ import com.capstone.submissionexpertone.core.domain.model.Movie
 import com.capstone.submissionexpertone.core.domain.usecase.MovieUseCase
 import com.capstone.submissionexpertone.favorite.databinding.FragmentFavoriteBinding
 import com.capstone.submissionexpertone.favorite.di.FavoriteComponent
+import com.capstone.submissionexpertone.favorite.di.FavoriteViewModelFactory
 import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {

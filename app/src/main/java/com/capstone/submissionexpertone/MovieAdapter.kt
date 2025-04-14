@@ -43,9 +43,6 @@ class MovieAdapter(private val onItemClick: (Movie) -> Unit) :
         }
     }
 
-    override fun onViewRecycled(holder: MovieViewHolder) {
-        super.onViewRecycled(holder)
-    }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {

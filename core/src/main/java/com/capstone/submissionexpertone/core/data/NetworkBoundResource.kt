@@ -22,7 +22,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 }
                 is ApiResponse.Error -> {
                     onFetchFailed()
-                    emit(Resource.Error<ResultType>(apiResponse.errorMessage))
+                    emit(Resource.Error(apiResponse.errorMessage))
                 }
             }
         } else {
@@ -40,5 +40,5 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     protected abstract suspend fun saveCallResult(data: RequestType)
 
-    fun asFlow(): Flow<com.capstone.submissionexpertone.core.data.Resource<ResultType>> = result
+    fun asFlow(): Flow<Resource<ResultType>> = result
 }

@@ -8,7 +8,7 @@ import com.capstone.submissionexpertone.core.domain.usecase.MovieUseCase
 import javax.inject.Inject
 
 class FavoriteViewModel @Inject constructor(
-    private val movieUseCase: MovieUseCase
+      movieUseCase: MovieUseCase
 ) : ViewModel() {
     val favoriteMovies: LiveData<List<Movie>> = movieUseCase.getFavoriteMovies().asLiveData()
 }

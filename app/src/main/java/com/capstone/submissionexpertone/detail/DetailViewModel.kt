@@ -21,11 +21,11 @@ class DetailViewModel @Inject constructor(
     val currentMovie = MutableLiveData<Movie>()
     val isFavoriteStatus = MutableLiveData<Boolean>()
 
-    fun getMovieDetail(id: Int): LiveData<com.capstone.submissionexpertone.core.data.Resource<Movie>> {
+    fun getMovieDetail(id: Int): LiveData<Resource<Movie>> {
         movieId.value = id
         return movieUseCase.getMovieDetail(id).asLiveData().also { liveData ->
             liveData.observeForever { resource ->
-                if (resource is com.capstone.submissionexpertone.core.data.Resource.Success) {
+                if (resource is Resource.Success) {
                     resource.data?.let { movie ->
                         currentMovie.value = movie
                     }

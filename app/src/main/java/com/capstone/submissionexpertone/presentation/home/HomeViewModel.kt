@@ -15,6 +15,6 @@ class HomeViewModel @Inject constructor(
     movieUseCase: MovieUseCase
 ) : ViewModel() {
 
-    val movies: LiveData<com.capstone.submissionexpertone.core.data.Resource<List<Movie>>> =
+    val movies: LiveData<Resource<List<Movie>>> =
         movieUseCase.getPopularMovies().asLiveData()
 }

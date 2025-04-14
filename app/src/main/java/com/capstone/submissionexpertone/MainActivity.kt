@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.capstone.submissionexpertone.R
 import com.capstone.submissionexpertone.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
